@@ -629,11 +629,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    width: min(60px, 15vw);  /* Scales for tablet/mobile */
+    aspect-ratio: 1 / 1;     /* Keeps perfect circle shape */
     background-color: var(--bg-color);
     border-radius: 50%;
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 2.5vw, 1.4rem); /* Responsive font size */
     color: var(--accent-color);
     box-shadow: var(--shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -642,6 +642,38 @@ nav {
     opacity: 0;
     transform: translateY(20px);
 }
+
+.contact.in-view .contact-social-links a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-social-links a:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+.contact-social-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.contact-social-links a:hover::before {
+    opacity: 1;
+}
+
+.contact-social-links a i {
+    position: relative;
+    z-index: 1;
+}
+
 
 .contact.in-view .contact-social-links a {
     opacity: 1;
@@ -893,4 +925,5 @@ img, button, h1, h2, h3, p, a, li {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-color);
+
 } 
